@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.InputSystem;
 
 public class Recipient : MonoBehaviour {
+    
+    public float playerScore;
+    public TMP_Text playerScoreCount;
+    
     // Start is called before the first frame update
     void Start() {
 
@@ -23,8 +28,14 @@ public class Recipient : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col) {
         Debug.Log(col.gameObject.name);
         Debug.Log("Get Destroyed");
+        AddScore();
         Destroy(col.gameObject);
         // Play animation
         // Increment points counter??
+    }
+    void AddScore()
+    {
+        playerScore += 0.5f;
+        playerScoreCount.text = playerScore.ToString();
     }
 }
