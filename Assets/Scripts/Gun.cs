@@ -5,8 +5,23 @@ using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour {
 
-    public Vector2 mousePosition;
+    public Vector3 mousePosition;
+    public float angle;
+    public Vector2 direction;
     
+    public Ray ray;
+    public RaycastHit2D hit;
+
+    [SerializeField] GameObject Envelope;   // prefab of envelope to be shot
+    GameObject shotEnvelope;    // the envelope that was shot
+    Rigidbody2D envelopeRb;
+    [SerializeField] Vector3 envSpawnOffset;
+    [SerializeField] float fireSpeed = 15;
+    Quaternion envRotation = Quaternion.identity;
+    
+    public Vector2 target;
+    public Vector2 fireDirection;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +30,38 @@ public class Gun : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        mousePosition = Mouse.current.position.ReadValue();
+        
+        // Rotate the gun to face the mouse
+        mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        direction = mousePosition - transform.position;    // find direction between mouse position and gun position
+        angle = Vector2.SignedAngle(Vector2.up, direction);        // find the angle needed to rotate
+        transform.eulerAngles = new Vector3(0, 0, angle);    // rotate
+
+    }
+
+    void OnShoot(InputValue value) {
+        Debug.Log("Shoot");
+        
+        // to get game object of thing hit if smth is hit
+        ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
+        
+        // I'm not sure this section is needed but it might make the animations look better, I'm not sure I haven't tested it on a moving truck yet
+        if (hit.collider != null && hit.collider.gameObject.CompareTag("Person")) {
+            Debug.Log(hit.collider.gameObject.name);
+            target = hit.collider.gameObject.transform.position;
+            // personHit offset if needed to make animations look better?
+        } else {
+            Debug.Log("hit something else");
+            target = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        }
+        
+        // target acquired, shoot envelope
+        fireDirection = target - new Vector2(transform.position.x, transform.position.y);
+        fireDirection.Normalize();
+        shotEnvelope = Instantiate(Envelope, transform.position + envSpawnOffset, envRotation);
+        envelopeRb = shotEnvelope.GetComponent<Rigidbody2D>();
+        envelopeRb.velocity = fireDirection * fireSpeed;
+
     }
 }
