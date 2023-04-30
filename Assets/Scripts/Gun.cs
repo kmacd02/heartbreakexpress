@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Gun : MonoBehaviour {
 
     public Vector3 mousePosition;
     public float angle;
     public Vector2 direction;
-    
+
     public Ray ray;
     public RaycastHit2D hit;
 
@@ -50,6 +52,7 @@ public class Gun : MonoBehaviour {
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Person")) {
             Debug.Log(hit.collider.gameObject.name);
             target = hit.collider.gameObject.transform.position;
+            
             // personHit offset if needed to make animations look better?
         } else {
             Debug.Log("hit something else");
