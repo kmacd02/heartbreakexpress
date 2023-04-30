@@ -14,13 +14,15 @@ public class Gun : MonoBehaviour {
     public Ray ray;
     public RaycastHit2D hit;
 
+    [SerializeField] Transform rotationPoint;
+
     [SerializeField] GameObject Envelope;   // prefab of envelope to be shot
     GameObject shotEnvelope;    // the envelope that was shot
     Rigidbody2D envelopeRb;
     [SerializeField] Vector3 envSpawnOffset;
     [SerializeField] float fireSpeed = 15;
     Quaternion envRotation = Quaternion.identity;
-    
+
     public Vector2 target;
     public Vector2 fireDirection;
 
@@ -33,11 +35,11 @@ public class Gun : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         
-        // Rotate the gun to face the mouse
+        // Rotate the gun around a point to face the mouse
         mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-        direction = mousePosition - transform.position;    // find direction between mouse position and gun position
-        angle = Vector2.SignedAngle(Vector2.up, direction);        // find the angle needed to rotate
-        transform.eulerAngles = new Vector3(0, 0, angle);    // rotate
+        direction = mousePosition - transform.position;
+        angle = Vector2.SignedAngle(transform.up, direction);
+        transform.RotateAround(rotationPoint.position, new Vector3(0, 0, 1), angle);
 
     }
 
@@ -62,7 +64,7 @@ public class Gun : MonoBehaviour {
         // target acquired, shoot envelope
         fireDirection = target - new Vector2(transform.position.x, transform.position.y);
         fireDirection.Normalize();
-        shotEnvelope = Instantiate(Envelope, transform.position + envSpawnOffset, envRotation);
+        shotEnvelope = Instantiate(Envelope, rotationPoint.position, envRotation);
         envelopeRb = shotEnvelope.GetComponent<Rigidbody2D>();
         envelopeRb.velocity = fireDirection * fireSpeed;
 

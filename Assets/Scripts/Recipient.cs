@@ -24,18 +24,17 @@ public class Recipient : MonoBehaviour {
     //     Debug.Log("Get Destroyed");
     // }
 
-    // When the envelope collides with itself, play animation and delete the envelope game object
+    // When the envelope collides with itself, play animation, add score, and delete the envelope game object
     void OnTriggerEnter2D(Collider2D col) {
         Debug.Log(col.gameObject.name);
         Debug.Log("Get Destroyed");
         AddScore();
         Destroy(col.gameObject);
         // Play animation
-        // Increment points counter??
     }
     void AddScore()
     {
-        playerScore += 0.5f;
+        playerScore += 1f;
         playerScoreCount.text = playerScore.ToString();
     }
 }
