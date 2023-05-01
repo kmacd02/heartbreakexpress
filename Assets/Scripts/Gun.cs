@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 public class Gun : MonoBehaviour {
 
@@ -31,9 +33,14 @@ public class Gun : MonoBehaviour {
     public Vector2 target;
     public Vector2 fireDirection;
 
+    static Object[] envAmmo;
+    int randomEnv;
+
     // Start is called before the first frame update
     void Start() {
-        
+        if (envAmmo == null) {
+            envAmmo = Resources.LoadAll("EnvelopeAmmoSprites", typeof(Sprite));
+        }
     }
 
     // Update is called once per frame
@@ -72,6 +79,8 @@ public class Gun : MonoBehaviour {
 
         // record time of cooldown ending
         canShoot = Time.time + cooldownTime;
+
+        randomEnv = UnityEngine.Random.Range(0, envAmmo.Length);
         
         // target acquired, shoot envelope
         fireDirection = target - new Vector2(transform.position.x, transform.position.y);
@@ -80,6 +89,7 @@ public class Gun : MonoBehaviour {
         envRotation.x = Quaternion.identity.x;
         envRotation.y = Quaternion.identity.y;
         shotEnvelope = Instantiate(Envelope, rotationPoint.position, envRotation);
+        shotEnvelope.GetComponent<SpriteRenderer>().sprite = Instantiate(envAmmo[randomEnv]) as Sprite;
         envelopeRb = shotEnvelope.GetComponent<Rigidbody2D>();
         envelopeRb.velocity = fireDirection * fireSpeed;
         isScaling = false;
