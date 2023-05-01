@@ -68,12 +68,12 @@ public class Gun : MonoBehaviour {
         
         // I'm not sure this section is needed but it might make the animations look better, I'm not sure I haven't tested it on a moving truck yet
         if (hit.collider != null && hit.collider.gameObject.CompareTag("Person")) {
-            Debug.Log(hit.collider.gameObject.name);
+            // Debug.Log(hit.collider.gameObject.name);
             target = hit.collider.gameObject.transform.position;
             
             // personHit offset if needed to make animations look better?
         } else {
-            Debug.Log("hit something else");
+            // Debug.Log("hit something else");
             target = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         }
 
@@ -97,17 +97,18 @@ public class Gun : MonoBehaviour {
     }
 
     IEnumerator scaleOverTime(GameObject flyingEnv, Vector3 toScale, float duration) {
-        Debug.Log("Scaling Coroutine");
+        // Debug.Log("Scaling Coroutine");
 
         if (isScaling) {
             yield break;
         }
-
+        
         float counter = 0;
 
         Vector3 startScale = flyingEnv.transform.localScale;
 
         while (counter < duration) {
+            if (!flyingEnv) yield break;
             counter += Time.deltaTime;
             flyingEnv.transform.localScale = Vector3.Lerp(startScale, toScale, counter / duration);
             // terrible implementation of deleting too small game objects

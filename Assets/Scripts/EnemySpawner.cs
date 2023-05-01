@@ -5,13 +5,16 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private float spawnRate = 1f;
+    public static float startTime;
 
     // all types of enemies
-    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private GameObject enemyPrefab;
 
     [SerializeField] private bool canSpawn = true; 
+    [SerializeField] private Transform playerPos;
 
     private void Start() {
+        startTime = Time.time;
         StartCoroutine(Spawner()); 
     } 
 
@@ -21,10 +24,12 @@ public class EnemySpawner : MonoBehaviour
         while (canSpawn) {
             yield return wait; 
 
-            int rand = Random.Range(0, enemyPrefabs.Length);
-            GameObject enemyToSpawn = enemyPrefabs[rand]; 
-
-            Instantiate(enemyToSpawn, transform.position, Quaternion.identity); 
+            Vector3 noise = new Vector3(
+                Random.Range(-.25f, .25f),
+                Random.Range(-.25f, .25f),
+                Random.Range(-.25f, .25f)
+            );
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>().playerPos = playerPos.position + noise; 
         }
     }
 }

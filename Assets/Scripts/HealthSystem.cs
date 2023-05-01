@@ -20,10 +20,10 @@ public class HealthSystem : MonoBehaviour
             if (i + 1 <= hearts)
             {
                 GameObject heart = Instantiate(LiveHeartPrefab, transform.position, Quaternion.identity);
-                heart.transform.parent = transform;
+                heart.transform.SetParent(transform);
             } else {
                 GameObject heart = Instantiate(DeadHeartPrefab, transform.position, Quaternion.identity);
-                heart.transform.parent = transform;
+                heart.transform.SetParent(transform);
             }
         }
     }
