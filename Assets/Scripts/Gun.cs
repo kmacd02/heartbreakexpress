@@ -62,6 +62,8 @@ public class Gun : MonoBehaviour {
             return;
         }
         
+        GetComponent<AudioSource>().Play();
+
         // to get game object of thing hit if smth is hit
         ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity);
