@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 1779576964}
     - target: {fileID: 4392307515240476494, guid: ae2a899a027887d49ab1a2b6c59039b7, type: 3}
       propertyPath: fireSpeed
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4392307515240476494, guid: ae2a899a027887d49ab1a2b6c59039b7, type: 3}
       propertyPath: rotationPoint
@@ -1463,7 +1463,7 @@ Transform:
   m_GameObject: {fileID: 573651060}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.15, y: -4.47, z: -0.06152139}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2057976672}

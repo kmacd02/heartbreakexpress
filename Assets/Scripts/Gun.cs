@@ -14,6 +14,11 @@ public class Gun : MonoBehaviour {
     public Ray ray;
     public RaycastHit2D hit;
 
+    bool cooldown = false;
+    [SerializeField] float cooldownTime = 2f;
+    float canShoot = -1f;
+    bool isScaling = false;
+
     [SerializeField] Transform rotationPoint;
 
     [SerializeField] GameObject Envelope;   // prefab of envelope to be shot
@@ -27,8 +32,7 @@ public class Gun : MonoBehaviour {
     public Vector2 fireDirection;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         
     }
 
@@ -42,9 +46,14 @@ public class Gun : MonoBehaviour {
         transform.RotateAround(rotationPoint.position, new Vector3(0, 0, 1), angle);
 
     }
+    
+    // All the gun shooting functionality 
+    void Shoot() {
 
-    void OnShoot(InputValue value) {
-        Debug.Log("Shoot");
+        // cooldown implementation
+        if (Time.time < canShoot) {
+            return;
+        }
         
         // to get game object of thing hit if smth is hit
         ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -60,13 +69,45 @@ public class Gun : MonoBehaviour {
             Debug.Log("hit something else");
             target = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         }
+
+        // record time of cooldown ending
+        canShoot = Time.time + cooldownTime;
         
         // target acquired, shoot envelope
         fireDirection = target - new Vector2(transform.position.x, transform.position.y);
         fireDirection.Normalize();
+        envRotation = UnityEngine.Random.rotation;
+        envRotation.x = Quaternion.identity.x;
+        envRotation.y = Quaternion.identity.y;
         shotEnvelope = Instantiate(Envelope, rotationPoint.position, envRotation);
         envelopeRb = shotEnvelope.GetComponent<Rigidbody2D>();
         envelopeRb.velocity = fireDirection * fireSpeed;
+        isScaling = false;
+        StartCoroutine(scaleOverTime(shotEnvelope, new Vector3(0.003f, 0.003f, 0f), 2f));
+    }
 
+    IEnumerator scaleOverTime(GameObject flyingEnv, Vector3 toScale, float duration) {
+        Debug.Log("Scaling Coroutine");
+
+        if (isScaling) {
+            yield break;
+        }
+
+        float counter = 0;
+
+        Vector3 startScale = flyingEnv.transform.localScale;
+
+        while (counter < duration) {
+            counter += Time.deltaTime;
+            flyingEnv.transform.localScale = Vector3.Lerp(startScale, toScale, counter / duration);
+            yield return null;
+        }
+
+        isScaling = false;
+
+    }
+
+    void OnShoot(InputValue value) {
+        Shoot();
     }
 }
