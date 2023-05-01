@@ -100,6 +100,11 @@ public class Gun : MonoBehaviour {
         while (counter < duration) {
             counter += Time.deltaTime;
             flyingEnv.transform.localScale = Vector3.Lerp(startScale, toScale, counter / duration);
+            // terrible implementation of deleting too small game objects
+            if (flyingEnv.transform.localScale.magnitude < new Vector3(0.0043f, 0.0043f, 0f).magnitude) {
+                Destroy(flyingEnv);
+                counter = duration;
+            }
             yield return null;
         }
 
