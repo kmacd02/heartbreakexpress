@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1077757190}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &146733397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 624363564}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &169649937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,6 +865,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1077757190}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &330790381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1265,6 +1271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1728737431}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &474972218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,6 +1510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 2020677029}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &651134571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1661,6 +1671,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 679086660}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &651879397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2042,6 +2054,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 277266321}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &771543937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2511,6 +2525,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 679086660}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &1086191406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,6 +2985,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 2020677029}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &1393671385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3128,6 +3146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 624363564}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &1567031793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3251,7 +3271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1728737432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3376,6 +3396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 277266321}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &1734711103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3603,6 +3625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1204058934}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &1845167869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3762,6 +3786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1204058934}
+  panelSwitch: {fileID: 0}
+  panelSwitch2: {fileID: 0}
 --- !u!114 &1869897220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3885,7 +3911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1951718444
 RectTransform:
   m_ObjectHideFlags: 0
